@@ -1,8 +1,6 @@
 qmk clean
-qmk compile -kb dactyl_manuform -km default
-cp ~/qmk_firmware/dactyl_manuform_default.uf2 ~/qmk_firmware/keyboards/dactyl_manuform_default.uf2
-cp ~/git/qmk_firmware/dactyl_manuform_default.uf2 ~/git/qmk_firmware/keyboards/dactyl_manuform_default.uf2
-
+qmk compile -kb iandactyl -km default
+cp /Users/ian/qmk_firmware/.build/iandactyl_default.uf2 /Users/ian/qmk_firmware/keyboards/iandactyl/iandactyl_default.uf2
 
 `qmk console` to debug
 
