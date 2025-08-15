@@ -1,5 +1,7 @@
 RGBLIGHT_ENABLE = yes
 SPLIT_KEYBOARD 	= yes
-CONSOLE_ENABLE 	= yes
-DEBUG			= yes
+TAP_DANCE_ENABLE = yes
+
 # VIAL = yes
+# DEBUG			= yes
+# CONSOLE_ENABLE 	= yes
