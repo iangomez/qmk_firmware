@@ -1,13 +1,13 @@
 #include QMK_KEYBOARD_H
 #include "print.h"
 
-#define ALT_F9 MT(MOD_LALT, KC_F9)
+#define ALT_F9 MT(MOD_LALT, KC_F9)  // Alt F9
 #define LT1_A LT(1,KC_A)            // _ARROWS
 // #define LT2_S LT(2,KC_S)         // _F_KEYS
 #define LT3_D LT(3,KC_D)            // _NUMPAD
 #define LT4_F LT(4,KC_F)            // _SYMBOLS
 #define LT3_CLN LT(3,KC_SCLN)       // _NUMPAD
-#define SFT_GRV LSFT_T(KC_GRV) // Grave Shift
+#define SFT_GRV LSFT_T(KC_GRV)      // Grave Shift
 
 
 #define _MAIN     0
@@ -57,7 +57,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 void keyboard_post_init_user(void) {
   // Customise these values to desired behaviour
-  debug_enable=true;
+  debug_enable=false;
   debug_matrix=false;
   rgblight_layers = layer_rgb;
 }
@@ -76,11 +76,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                     _______,        _______,                                                                                _______,        _______, 
                                                                     KC_SPACE,       KC_LSFT,                KC_BSPC,        KC_ENTER,
                                                                     _______,        KC_LGUI,                KC_LCTL,        _______,
-                                                                    _______,        MISCTRL,                FOCUS_D,        _______  
+                                                                    _______,        MISCTRL,                SPOTLIT,        _______  
   ),
   [_ARROWS] = LAYOUT_5x6(
     _______,        _______,        _______,        _______,        QK_REBOOT,      QK_BOOT,                _______,        _______,        _______,        _______,        _______,        _______, 
-    _______,        _______,        _______,        KC_ESC,         SPOTLIT,        _______,                _______,        KC_HOME,        KC_UP,          KC_END,        _______,        _______, 
+    _______,        _______,        _______,        KC_ESC,         _______,        _______,                _______,        KC_HOME,        KC_UP,          KC_END,        _______,        _______, 
     _______,        _______,        KC_LCTL,        KC_LSFT,        KC_LALT,        KC_DEL,                 _______,        KC_LEFT,        KC_DOWN,        KC_RIGHT,       _______,        _______, 
     _______,        _______,        _______,        _______,        _______,        _______,                _______,        _______,        _______,        _______,        _______,        _______, 
                                     _______,        _______,                                                                                _______,        _______, 
@@ -157,13 +157,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     break;
 
-    case SPOTLIT:
-    if (record->event.pressed) {
-        register_code(KC_LGUI);    // Hold Command
-        tap_code(KC_SPC);          // Tap Space
-        unregister_code(KC_LGUI);  // Release Command
-    }
-    return false; // Prevent QMK from doing anything else
+    // case SPOTLIT:
+    // if (record->event.pressed) {
+    //   tap_code16(G(KC_SPC));
+    // }
+    // return false;
   }
   
   #ifdef CONSOLE_ENABLE
