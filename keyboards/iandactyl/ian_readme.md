@@ -1,8 +1,16 @@
+# build
 qmk clean; qmk compile -kb iandactyl -km default
-cp /Users/ian/qmk_firmware/.build/iandactyl_default.uf2 /Users/ian/qmk_firmware/keyboards/iandactyl/iandactyl_default.uf2
+
+# flash
+qmk flash -kb iandactyl -km default
 
 
-`qmk console` to debug
+
+`cp /Users/ian/git/qmk_firmware/.build/iandactyl_default.uf2 /Volumes/RPI-RP2/iandactyl_default.uf2`
+
+
+
+# `qmk console` to debug
 
 
 # iandox

@@ -22,9 +22,7 @@ enum custom_keycodes {
   MAC_SS,  // Mac snagit screenshot
   MISCTRL, // Mission Control
   FOCUS_D, // Focus macos dock
-  SPOTLIT, // Spotlight
 };
-
 const rgblight_segment_t PROGMEM layer_rgb_0[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, HSV_RED});
 const rgblight_segment_t PROGMEM layer_rgb_1[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, HSV_GREEN});
 const rgblight_segment_t PROGMEM layer_rgb_2[] = RGBLIGHT_LAYER_SEGMENTS({0, 1, HSV_BLUE});
@@ -63,7 +61,7 @@ void keyboard_post_init_user(void) {
 }
 
 tap_dance_action_t tap_dance_actions[] = {
-    [TAB_ESC] = ACTION_TAP_DANCE_DOUBLE(KC_TAB, KC_ESC),
+  [TAB_ESC] = ACTION_TAP_DANCE_DOUBLE(KC_TAB, KC_ESC),
 };
 
 // Keymaps 
@@ -73,14 +71,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     TD(TAB_ESC),    KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,                   KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_BSLS,        
     ALT_F9,         LT1_A,          KC_S,           LT3_D,          LT4_F,          KC_G,                   KC_H,           KC_J,           KC_K,           KC_L,           LT3_CLN,        KC_QUOTE,       
     SFT_GRV,        KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                   KC_N,           KC_M,           KC_COMM,        KC_DOT,         KC_SLASH,       MAC_SS,   
-                                    _______,        _______,                                                                                _______,        _______, 
+                                    KC_NO,          KC_NO,                                                                                  KC_NO,          KC_NO, 
                                                                     KC_SPACE,       KC_LSFT,                KC_BSPC,        KC_ENTER,
-                                                                    _______,        KC_LGUI,                KC_LCTL,        _______,
-                                                                    _______,        MISCTRL,                SPOTLIT,        _______  
+                                                                    KC_NO,          KC_LGUI,                KC_LCTL,        KC_NO,
+                                                                    KC_NO,          MISCTRL,                KC_NO,          KC_NO  
   ),
   [_ARROWS] = LAYOUT_5x6(
     _______,        _______,        _______,        _______,        QK_REBOOT,      QK_BOOT,                _______,        _______,        _______,        _______,        _______,        _______, 
-    _______,        _______,        _______,        KC_ESC,         _______,        _______,                _______,        KC_HOME,        KC_UP,          KC_END,        _______,        _______, 
+    _______,        _______,        _______,        KC_ESC,        _______,        _______,                _______,        KC_HOME,        KC_UP,          KC_END,        _______,        _______, 
     _______,        _______,        KC_LCTL,        KC_LSFT,        KC_LALT,        KC_DEL,                 _______,        KC_LEFT,        KC_DOWN,        KC_RIGHT,       _______,        _______, 
     _______,        _______,        _______,        _______,        _______,        _______,                _______,        _______,        _______,        _______,        _______,        _______, 
                                     _______,        _______,                                                                                _______,        _______, 
@@ -114,25 +112,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
 
-    case TAB_ESC:
-    if (record->event.pressed) {
-        if (record->tap.count > 0) {
-            // Tapped: do nothing here, wait for release
-        } else {
-            // Hold: send Escape down
-            register_code(KC_ESC);
-        }
-    } else {
-        if (record->tap.count > 0) {
-            // Tapped: send Tab now
-            tap_code(KC_TAB);
-        } else {
-            // Hold: release Escape
-            unregister_code(KC_ESC);
-        }
-    }
-    return false;
-
     case WIN_SS:
     if (record->event.pressed) {
       SEND_STRING(SS_LGUI(SS_LSFT(SS_TAP(X_S))));
@@ -156,12 +135,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       tap_code16(C(KC_F3));  // Control + F3 to focus Dock
     }
     break;
-
-    // case SPOTLIT:
-    // if (record->event.pressed) {
-    //   tap_code16(G(KC_SPC));
-    // }
-    // return false;
   }
   
   #ifdef CONSOLE_ENABLE
